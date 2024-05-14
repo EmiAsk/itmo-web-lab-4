@@ -1,0 +1,10 @@
+spring:
+  liquibase:
+    enabled: false
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://pg:5432/studs
+    username: s367064
+    password: IPwpuvlnwnhZ3cAv
+

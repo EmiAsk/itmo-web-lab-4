@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/lab4
+    username: postgres
+    password: password
+
+app:
+  jwt:
+    secret: 4523e1e79162486571c8ad0fb5c496b528a625bb62c7d9ce6c6f853ca8d90eb3
