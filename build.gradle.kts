@@ -1,4 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import javax.sound.sampled.AudioSystem
+import javax.sound.sampled.Clip
+
 
 plugins {
 	id("org.springframework.boot") version "3.2.0"
@@ -38,7 +41,6 @@ dependencies {
 	implementation("io.arrow-kt:arrow-core:$arrowVersion")
 	implementation("io.arrow-kt:arrow-fx-coroutines:$arrowVersion")
 	implementation("io.jsonwebtoken:jjwt:0.12.3")
-
 	implementation("org.seleniumhq.selenium:selenium-java:4.1.1")
 	implementation("io.github.microutils:kotlin-logging:2.0.3")
 }
@@ -47,6 +49,16 @@ tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs += "-Xjsr305=strict"
 		jvmTarget = "17"
+	}
+}
+
+tasks.register<Task>("music"){
+	dependsOn("build")
+	doLast{
+		val musicFile = File("/Users/pavelmalkov/IdeaProjects/GitHub/itmo-web-lab-4/muzlo.wav")
+		val clip = AudioSystem.getClip()
+		clip.open(AudioSystem.getAudioInputStream(musicFile))
+		clip.start()
 	}
 }
 
