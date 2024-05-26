@@ -1,6 +1,10 @@
+import org.jetbrains.kotlin.codegen.intrinsics.ArrayOf
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.utils.join
+import java.io.BufferedReader
+import java.io.FileInputStream
+import java.io.InputStreamReader
 import javax.sound.sampled.AudioSystem
-import javax.sound.sampled.Clip
 
 
 plugins {
@@ -61,6 +65,34 @@ tasks.register<Task>("music"){
 		clip.start()
 	}
 }
+
+tasks.register<Task>("diff") {
+
+	val exitCode = exec {
+		workingDir = projectDir
+		isIgnoreExitValue = true
+		standardOutput = System.out
+		val files = BufferedReader(InputStreamReader(FileInputStream(File("files.txt")))).readLines()
+		if (files.isNotEmpty()) commandLine("git", "diff", "--diff-filter=MRD", "--name-only", "--exit-code", join(files,  " "))
+	}
+	if (exitCode.exitValue == 0) {
+		println("No changes to relevant classes. Committing to git...")
+		exec {
+			workingDir = projectDir
+			standardOutput = System.out
+			commandLine("git", "add", "--all")
+		}
+		exec {
+			workingDir = projectDir
+			standardOutput = System.out
+			commandLine("git", "commit", "-m", "'chore: update generated code'")
+		}
+	} else {
+		println("Changes detected in relevant classes. Skipping commit.")
+	}
+}
+
+
 
 tasks.withType<Test> {
 	useJUnitPlatform()
