@@ -3,9 +3,8 @@ package ru.ifmo.se.lab4.service
 import arrow.core.Either
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import ru.ifmo.se.lab4.CryptoUtils
+import ru.ifmo.se.lab4.authentication.CryptoUtils
 import ru.ifmo.se.lab4.model.CustomError
-import ru.ifmo.se.lab4.model.RepositoryError
 import ru.ifmo.se.lab4.model.User
 import ru.ifmo.se.lab4.model.UserId
 import ru.ifmo.se.lab4.repository.UserRepository

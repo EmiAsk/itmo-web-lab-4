@@ -9,8 +9,8 @@ import org.springframework.security.config.http.SessionCreationPolicy.STATELESS
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector
-import ru.ifmo.se.lab4.JwtFilter
-import ru.ifmo.se.lab4.JwtUtils
+import ru.ifmo.se.lab4.authentication.JwtFilter
+import ru.ifmo.se.lab4.authentication.JwtUtils
 
 @EnableWebSecurity
 @Configuration

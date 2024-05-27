@@ -1,4 +1,4 @@
-package ru.ifmo.se.lab4.e2e
+package ru.ifmo.se.lab4.testcontainers
 
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.utility.DockerImageName

@@ -1,4 +1,4 @@
-package ru.ifmo.se.lab4
+package ru.ifmo.se.lab4.authentication
 
 import jakarta.servlet.FilterChain
 import jakarta.servlet.GenericFilter

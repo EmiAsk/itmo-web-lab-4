@@ -1,4 +1,4 @@
-package ru.ifmo.se.lab4
+package ru.ifmo.se.lab4.authentication
 
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails

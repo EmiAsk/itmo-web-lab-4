@@ -1,8 +1,10 @@
-package ru.ifmo.se.lab4.e2e
+package ru.ifmo.se.lab4.configuration
 
 import org.springframework.boot.test.util.TestPropertyValues
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
+import ru.ifmo.se.lab4.testcontainers.PostgreSqlContainer
+import ru.ifmo.se.lab4.testcontainers.WebAppContainer
 
 class E2EInitializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
     override fun initialize(applicationContext: ConfigurableApplicationContext) {

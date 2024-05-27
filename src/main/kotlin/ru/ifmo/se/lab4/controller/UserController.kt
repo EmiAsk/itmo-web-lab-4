@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import ru.ifmo.se.lab4.CryptoUtils
-import ru.ifmo.se.lab4.JwtUtils
+import ru.ifmo.se.lab4.authentication.CryptoUtils
+import ru.ifmo.se.lab4.authentication.JwtUtils
 import ru.ifmo.se.lab4.model.RepositoryError
 import ru.ifmo.se.lab4.model.UserData
 import ru.ifmo.se.lab4.model.dto.ErrorResponse

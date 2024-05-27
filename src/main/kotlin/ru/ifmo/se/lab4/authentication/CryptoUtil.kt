@@ -1,4 +1,4 @@
-package ru.ifmo.se.lab4
+package ru.ifmo.se.lab4.authentication
 
 import org.springframework.context.annotation.Bean
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -10,16 +10,8 @@ import java.util.Base64
 
 @Component
 class CryptoUtils {
-    fun digestPassword(plainTextPassword: String?): String {
-        return try {
-            encoder().encode(plainTextPassword)
-        } catch (e: Exception) {
-            throw RuntimeException("Exception encoding password", e)
-        }
-    }
-
-    fun digestPasswordSha(plainTextPassword: String): String {
-        return try {
+    fun digestPasswordSha(plainTextPassword: String): String =
+        try {
             val md = MessageDigest.getInstance("SHA-256")
             md.update(plainTextPassword.toByteArray(StandardCharsets.UTF_8))
             val passwordDigest = md.digest()
@@ -27,12 +19,9 @@ class CryptoUtils {
         } catch (e: Exception) {
             throw RuntimeException("Exception encoding password", e)
         }
-    }
 
     @Bean
-    private fun encoder(): PasswordEncoder {
-        return BCryptPasswordEncoder(BCRYPT_STRENGTH)
-    }
+    private fun encoder(): PasswordEncoder = BCryptPasswordEncoder(BCRYPT_STRENGTH)
 
     companion object {
         private const val BCRYPT_STRENGTH = 11

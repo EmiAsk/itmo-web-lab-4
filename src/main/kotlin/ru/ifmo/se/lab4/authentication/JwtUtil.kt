@@ -1,4 +1,4 @@
-package ru.ifmo.se.lab4
+package ru.ifmo.se.lab4.authentication
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jws

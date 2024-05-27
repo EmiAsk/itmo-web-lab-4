@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import ru.ifmo.se.lab4.JwtUtils
-import ru.ifmo.se.lab4.UserPrincipal
+import ru.ifmo.se.lab4.authentication.JwtUtils
+import ru.ifmo.se.lab4.authentication.UserPrincipal
 import ru.ifmo.se.lab4.model.dto.AttemptRequest
-import ru.ifmo.se.lab4.model.dto.ErrorResponse
 import ru.ifmo.se.lab4.model.dto.toErrorResponse
 import ru.ifmo.se.lab4.service.AttemptService
 import ru.ifmo.se.lab4.service.UserService

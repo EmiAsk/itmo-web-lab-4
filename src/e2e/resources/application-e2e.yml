@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    username: postgres
+    password: postgres
+
+server:
+  port: 8080
+
+app:
+  jwt:
+    secret: 4523e1e79162486571c8ad0fb5c496b528a625bb62c7d9ce6c6f853ca8d90eb3

@@ -3,7 +3,7 @@ package ru.ifmo.se.lab4.service
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
-import ru.ifmo.se.lab4.UserPrincipal
+import ru.ifmo.se.lab4.authentication.UserPrincipal
 
 class UserDetailsServiceImpl(private val service: UserService) : UserDetailsService {
     override fun loadUserByUsername(username: String): UserDetails =

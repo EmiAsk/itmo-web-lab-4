@@ -4,7 +4,6 @@ import arrow.core.Either
 import arrow.core.flatMap
 import arrow.core.left
 import arrow.core.right
-import arrow.fx.coroutines.Use
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Repository
 import ru.ifmo.se.lab4.model.RepositoryError
@@ -13,7 +12,6 @@ import ru.ifmo.se.lab4.model.UserId
 import ru.ifmo.se.lab4.repository.UserRepository
 import java.sql.ResultSet
 import java.util.UUID
-import kotlin.jvm.optionals.getOrNull
 
 @Repository
 class PgUserRepository(private val jdbcTemplate: JdbcTemplate) : UserRepository {
