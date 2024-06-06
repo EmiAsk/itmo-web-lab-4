@@ -1,8 +1,10 @@
 package ru.ifmo.se.lab4.service
 
 import arrow.core.Either
+import jakarta.annotation.PostConstruct
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import ru.ifmo.se.lab4.jmx.AttemptCounter
 import ru.ifmo.se.lab4.model.AttemptId
 import ru.ifmo.se.lab4.model.CustomError
 import ru.ifmo.se.lab4.model.UserId
@@ -11,14 +13,18 @@ import ru.ifmo.se.lab4.model.dto.AttemptResponse
 import ru.ifmo.se.lab4.model.dto.toAttempt
 import ru.ifmo.se.lab4.model.dto.toResponse
 import ru.ifmo.se.lab4.repository.AttemptRepository
+import java.lang.management.ManagementFactory
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
+import javax.management.MBeanServer
+import javax.management.ObjectName
 import kotlin.math.pow
 
 
 @Service
 class AttemptService(
-    val attemptRepository: AttemptRepository
+    val attemptRepository: AttemptRepository,
+    private val monitoringService: MonitoringService
 ) {
     private fun checkAttempt(attempt: AttemptRequest): Boolean =
         attempt.run {
@@ -28,16 +34,17 @@ class AttemptService(
         }
 
     @Transactional
-    fun addAttempt(attempt: AttemptRequest, userId: UserId): Either<CustomError, AttemptResponse> =
-        attemptRepository.insert(
-            attempt.toAttempt(
-                AttemptId.generate(),
-                OffsetDateTime.now(ZoneOffset.UTC),
-                checkAttempt(attempt),
-                userId
-            )
+    fun addAttempt(attemptRequest: AttemptRequest, userId: UserId, username: String): Either<CustomError, AttemptResponse> {
+        val attempt = attemptRequest.toAttempt(
+            AttemptId.generate(),
+            OffsetDateTime.now(ZoneOffset.UTC),
+            checkAttempt(attemptRequest),
+            userId
         )
-            .map { it.toResponse() }
+        monitoringService.count(username, attempt)
+        monitoringService.countTime(username)
+        return attemptRepository.insert(attempt).map { it.toResponse() }
+    }
 
     @Transactional
     fun getAttemptsByUserId(userId: UserId): Either<CustomError, List<AttemptResponse>> =

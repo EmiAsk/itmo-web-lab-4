@@ -14,6 +14,7 @@ import ru.ifmo.se.lab4.authentication.UserPrincipal
 import ru.ifmo.se.lab4.model.dto.AttemptRequest
 import ru.ifmo.se.lab4.model.dto.toErrorResponse
 import ru.ifmo.se.lab4.service.AttemptService
+import ru.ifmo.se.lab4.service.MonitoringService
 import ru.ifmo.se.lab4.service.UserService
 
 
@@ -21,13 +22,11 @@ import ru.ifmo.se.lab4.service.UserService
 @RequestMapping("attempt")
 @CrossOrigin
 class AttemptController(
-    private val attemptService: AttemptService,
-    private val userService: UserService,
-    private val jwt: JwtUtils
+    private val attemptService: AttemptService
 ) {
     @PostMapping
     fun addAttempt(@AuthenticationPrincipal user: UserPrincipal, @RequestBody attempt: AttemptRequest): Any {
-        return attemptService.addAttempt(attempt, user.userId)
+        return attemptService.addAttempt(attempt, user.userId, user.username)
             .getOrElse { it.toErrorResponse() }
     }
 
